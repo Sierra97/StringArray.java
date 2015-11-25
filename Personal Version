@@ -1,0 +1,91 @@
+//Connor Brennan
+//String Array Application
+// This program creates a string array of a size specified by the user, then prompts the user to fill it.  It then outputs the longest string and its data, the shortest string and its data, and the string that comes first alphabetically.
+
+//Imports TerminalIO and the java Arrays functions
+import TerminalIO.*;
+import java.util.Arrays;
+
+public class StringArray{
+  public static void main(String[]args){
+
+		//Declares variables and readers.
+		KeyboardReader in = new KeyboardReader();
+    String [] stringArray;
+
+		//Prompts the user for the size of the array and creates the array based on the input.
+		stringArray = new String[in.readInt("How many strings do you wish to enter?")];
+
+		for(int iters = 0; iters < stringArray.length; iters++){
+			stringArray[iters] = in.readLine("Please input string #" + iters + ".");
+		}
+
+		//This section finds the longest string and its data.
+
+		//Declares variables and sets them to 0/null.
+		int length = 0;
+		String longest = null;
+		int its = 0;
+		int slot = 0;
+
+		//Runs throw the entire array and finds the longest string and its data.
+		for(String current : stringArray){
+			if(current.length() > length){
+				length = current.length();
+				longest = current;
+				slot = its;
+			}
+			its++;
+		}
+
+		//Prints the data in a meaningful format.
+		System.out.print("The longest string is " + longest + ".  It is " + length + " characters long (including spaces), and exists in slot " + slot + " of the array.");
+
+
+		//This section finds the longest string and its data.
+
+		//Declares variables and sets them to 0/null.
+		length = 0;
+		String shortest = null;
+		its = 0;
+		slot = 0;
+
+		//Runs throw the entire array and finds the shortest string and its data.
+		for(String current : stringArray){
+			if(length == 0){
+				length = current.length();
+				shortest = current;
+				slot = its;
+			}
+
+			if(current.length() < length){
+				length = current.length();
+				shortest = current;
+				slot = its;
+			}
+
+			its++;
+		}
+
+		//Prints the data out in a meaningful format.
+		System.out.print("The shortest string is " + shortest + ".  It is " + length + " characters long (including spaces), and exists in slot " + slot + " of the array.");
+		
+		String[] stringArrayAlpha = stringArray;
+    Arrays.sort(stringArrayAlpha, String.CASE_INSENSITIVE_ORDER);
+    	
+		String alphaString = stringArrayAlpha[0];
+		its = 0;
+		slot = 0;
+		String first = null;
+	
+		for(String current : stringArray){
+			if(current.equals(alphaString)){
+				first = current;
+				slot = its;
+			}
+			its++;
+		}
+		System.out.print("The first string (alphabetically) is " + first + " in slot " + slot + " of the array.");
+
+	}
+}
